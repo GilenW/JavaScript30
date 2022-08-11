@@ -25,6 +25,21 @@
     /*
       misc styles, nothing to do with CSS variables
     */
+    :root{
+      --base:rgb(92, 92, 65);
+      --spacing:10px;
+      --blur:10px;
+    }
+
+    img{
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
+
+    .hl {
+      color: var(--base);
+    }
 
     body {
       text-align: center;
@@ -44,7 +59,20 @@
     }
   </style>
 
+
   <script>
+    const inputs = document.querySelectorAll('.controls inputs');
+    console.log(inputs);
+
+    function handleUpdate(){
+      const suffix = this.dataSet;
+      console.log(suffix);
+    }
+
+    inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
+  
+
+
   </script>
 
 </body>
