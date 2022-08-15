@@ -6,13 +6,14 @@
 </head>
 <body>
 <canvas id="draw" width="800" height="800"></canvas>
-
+<button id="clean">clean</button>
 
 <script>
+const clean = document.querySelector('#clean');
 const canvas = document.querySelector('#draw');
 const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.width = 500;
+canvas.height = 500;
 ctx.strokeStyle = '#BADA55';
 ctx.lineJoin = 'round';
 ctx.lineCap = 'round';
@@ -64,7 +65,10 @@ canvas.addEventListener('mousedown',(e) => {
 });
 canvas.addEventListener('mouseup',() => isDrawing = false);
 canvas.addEventListener('mouseout', ()=> isDrawing = false);
+clean.addEventListener('click',()=>{
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+})
 </script>
 
 <style>
