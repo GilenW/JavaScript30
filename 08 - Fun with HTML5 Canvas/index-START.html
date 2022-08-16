@@ -7,6 +7,10 @@
 <body>
 <canvas id="draw" width="800" height="800"></canvas>
 <button id="clean">clean</button>
+<div class="controls">
+	<label for="brush_size">Size:</label>
+	<input id="brush_size" type="range" name="brush_size" min="1" max="100" value="10">
+</div>
 
 <script>
 const clean = document.querySelector('#clean');
@@ -42,16 +46,16 @@ function draw(e){
 		hue = 0;
 	}
 
-	if(ctx.lineWidth >= 100 || ctx.lineWidth <= 1){
-		direction = !direction;
+	// if(ctx.lineWidth >= 100 || ctx.lineWidth <= 1){
+	// 	direction = !direction;
 
-	}
-	if(direction){
-		ctx.lineWidth++;
-	}
-	else{
-		ctx.lineWidth--;
-	}
+	// }
+	// if(direction){
+	// 	ctx.lineWidth++;
+	// }
+	// else{
+	// 	ctx.lineWidth--;
+	// }
 
 }
 
@@ -69,6 +73,15 @@ clean.addEventListener('click',()=>{
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 })
+
+
+/*ajust brush size*/
+function changeBrushSize(){
+	console.log(this.value);
+	ctx.lineWidth = this.value;
+}
+const input = document.querySelector('input');
+input.addEventListener('change', changeBrushSize);
 </script>
 
 <style>
