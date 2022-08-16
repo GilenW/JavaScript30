@@ -1,46 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Console Tricks!</title>
+	<meta charset="UTF-8">
+	<title>Console Tricks!</title>
 </head>
 <body>
 
-  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+	<p onClick="makeGreen()">×BREAK×DOWN×</p>
 
-  <script>
-    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+	<script>
+		const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
 
-    function makeGreen() {
-      const p = document.querySelector('p');
-      p.style.color = '#BADA55';
-      p.style.fontSize = '50px';
-    }
+		function makeGreen() {
+			const p = document.querySelector('p');
+			p.style.color = '#BADA55';
+			p.style.fontSize = '50px';
+		}
 
-    // Regular
+		// Regular
+		console.log('hi');
 
-    // Interpolated
+		// Interpolated
+		console.log('I am a %s', '🌟');
 
-    // Styled
+		// Styled
+		console.log('%c This text has 50px size', 'color: blue; font-size:50px; background:yellow; text-shadow:10px 10px 0 white');
 
-    // warning!
+		// warning!
+		console.warn('Weather Warning! Today is 40C')
+		// Error :|
+		console.error('This is a big ERROR!!!')
+		// Info
+		console.info('Today is 8/16/2022');
 
-    // Error :|
+		// Testing
+		const p = document.querySelector('p');
+		console.assert(p.classList.contains('ouch'), 'That is not "ouch" in the text');
 
-    // Info
+		// Viewing DOM Elements
+		console.log(p);
+		console.dir(p); //show the methods that live in the element.
+		// Grouping together
+		dogs.forEach(element => {
+			console.group(`${element.name}`);
+			console.log(`this is ${element.name}`);
+			console.log(`${element.name} is ${element.age} years old`);
+			console.log(`${element.name} is ${element.age * 7} dog years old`);
+			console.groupEnd(`${element.name}`);
+		});
 
-    // Testing
+		// counting
 
-    // clearing
+		console.count('data');
+		console.count('data');
+		console.count('data');
+		console.count('gisLab');
+		console.count('gisLab');
+		console.count('data');
+		console.count('gisLab');
 
-    // Viewing DOM Elements
 
-    // Grouping together
+		// timing
+		console.time('time of fetching data');
+		fetch('https://api.github.com/users/wesbos').then(data => data.json()).then(data => {
+			console.timeEnd('time of fetching data');
+		})
 
-    // counting
+		console.table(dogs);
+		// clearing
+		//console.clear();
 
-    // timing
-
-  </script>
+	</script>
 </body>
 </html>
