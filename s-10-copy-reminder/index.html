@@ -5,11 +5,28 @@
         <title>Reminder</title>
     </head>
     <body>
+        <!-- problems still need to fix:
+        1. the space or padding of checkbox is weird 
+        2. small screen everything squeezes-->
+        
         <style>
+            /* color reference: https://colorhunt.co/palette/fff9caffdeb4ffb4b4b2a4ff */
+
+            /* box-shadow reference: https://getcssscan.com/css-buttons-examples button 30 by algolia */
+
+            /* background pattern reference:  https://www.magicpattern.design/tools/css-backgrounds*/
             body{
                 /* margin: 0 ; */
-                border: red solid;
+                /* border: red solid; */
                 background-color: #FFF9CA;
+                font-family: Chalkduster, fantasy;
+                background-color: #FFB4B4;
+
+
+                background-image:  linear-gradient(135deg, #FFF9CA 25%, transparent 95%), linear-gradient(225deg, #FFF9CA 25%, transparent 95%), linear-gradient(45deg, #FFF9CA 25%, transparent 25%), linear-gradient(315deg, #FFF9CA 25%, #FFB4B4 25%);
+                background-position:  31px 0, 31px 0, 0 0, 0 0;
+                background-size: 62px 62px;
+                background-repeat: repeat;
             }
 
             .header{
@@ -17,7 +34,10 @@
                 justify-content: center;
                 padding: 10px;
                 font-size: 50px;
-                border: red solid;
+                margin-bottom: 10px;
+                font-family: Chalkduster, fantasy;
+                color: #dd7777;
+                /* border: red solid; */
             }
             .inbox{
                 display: flex;
@@ -26,14 +46,20 @@
                 padding: 2rem;
                 border-radius: 1rem;
                 width: 30%;
-                border: rgb(47, 0, 255) solid;
+                /* border: rgb(47, 0, 255) solid; */
                 background-color: #FFDEB4;
+
+                box-shadow: rgba(45, 35, 66, 0.4) 0 3px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#D6D6E7 0 -3px 0 inset;
+  box-sizing: border-box;
             }
 
             .inbox .item{
-                padding: 10px;
+                padding: 10px 10px 10px 20px;
                 display: flex;
-                border: red solid;
+                justify-content: space-around;
+                margin-bottom: 1rem;
+                background-color: #f6d9d9;
+                border-radius: 1rem;
             }
 
             input[type="text"]{
@@ -41,41 +67,94 @@
                 padding: 1rem;
                 border: none;
                 border-radius: 1rem;
+                color: rgb(10, 7, 7);
+                font-size: 20px;
                 background-color: #FFB4B4;
             }
             input[type="text"]:focus{
                 outline-style: none;
-                background-color: rgb(86, 102, 102);
+                background-color: #B2A4FF;
+                
             }
+
+            input:focus::placeholder{
+                color: transparent;
+            }
+
 
 
             input:checked + input[type="text"] {
-                background-color: coral;
+                background-color: #dd7777;
+                text-decoration: line-through;
             }
+
+            input[type="checkbox"]{
+                
+                
+                transform: scale(3);
+                margin-right: 50px;
+            }
+
+            ::placeholder{
+                color: rgba(255, 255, 255, 0.811);
+            }
+
+            .buttons{
+                display: flex;
+                margin: 10px auto;
+                padding: 2rem;
+                width: 30%;
+                justify-content:space-between;
+
+            }
+
+            button{
+                width: 30%;
+                color: #dd7777;
+                font-size: 15px;
+                padding: 1rem;
+                border-radius: 1rem;
+                border: none;
+
+                box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#D6D6E7 0 -3px 0 inset;
+  box-sizing: border-box;
+            }
+
+            button:hover{
+                background-color: #dd7777;
+                color: white;
+            }
+            
+            
         </style>
-        <div class="header"> Type you to-do list!</div>
+        <div class="header"> Today's routine</div>
         <div class="inbox">
             <div class="item">
                 <input type="checkbox">
-                <input type="text" id="todo" name="todo">
+                <input type="text" id="todo" name="todo" placeholder="Task 1">
             </div>
             <div class="item">
                 <input type="checkbox">
-                <input type="text" id="todo" name="todo">
+                <input type="text" id="todo" name="todo" placeholder="Task 2">
             </div>
             <div class="item">
                 <input type="checkbox">
-                <input type="text" id="todo" name="todo">
+                <input type="text" id="todo" name="todo" placeholder="Task 3">
             </div>
             <div class="item">
                 <input type="checkbox">
-                <input type="text" id="todo" name="todo">
+                <input type="text" id="todo" name="todo" placeholder="Task 4">
             </div>
+        </div>
+        <div class="buttons">
+            <button id="completeAll">Complete All</button>
+            <button id="clean">Clean</button>
         </div>
 
 
         <script>
             const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
+            const inputs = document.querySelectorAll('.inbox input[type="text"]')
 
             let lastChecked;
             let inbetween;
@@ -100,6 +179,26 @@
             checkboxes.forEach(element => {
                 element.addEventListener('click', handleChange);
             });
+
+            //buttons function
+
+            const completeButton = document.querySelector('#completeAll');
+            const cleanButton = document.querySelector('#clean');
+            completeButton.addEventListener('click',()=>{
+                checkboxes.forEach(element => {
+                    element.checked = true;
+                });
+            });
+
+            cleanButton.addEventListener('click',()=>{
+                checkboxes.forEach(element => {
+                    element.checked = false;
+                });
+                inputs.forEach(element => {
+                    element.value = '';
+                });
+
+            })
 
         </script>
     </body>
