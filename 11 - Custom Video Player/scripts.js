@@ -6,6 +6,7 @@ const progressBar = player.querySelector('.progress__filled');
 const toggle = player.querySelector('.toggle');
 const skipButtons = player.querySelectorAll('[data-skip]');
 const ranges = player.querySelectorAll('.player__slider');
+const fullScreen = player.querySelector('.full__screen');
 
 
 //build out functions
@@ -49,6 +50,19 @@ function scrub(e){
 	video.currentTime = scrubTime;
 	//console.log(e)
 }
+
+let closeFullScreen = false;
+
+function openScreen(){
+	closeFullScreen =! closeFullScreen;
+	if(closeFullScreen){
+		video.requestFullscreen();
+	}
+	else{
+		video.exitFullscreen();
+	}
+
+}
 //hook up the event listeners
 toggle.addEventListener('click', togglePlay);
 video.addEventListener('click', togglePlay);
@@ -79,4 +93,4 @@ progress.addEventListener('mousemove', () => {
 progress.addEventListener('mousedown', () => mousedown = true);
 progress.addEventListener('mouseup', () => mousedown = false);
 
-
+fullScreen.addEventListener('click', openScreen);
