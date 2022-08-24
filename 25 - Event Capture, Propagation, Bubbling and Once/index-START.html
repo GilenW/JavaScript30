@@ -40,8 +40,30 @@
   }
 </style>
 
-<button></button>
+<button>Click once</button>
 <script>
+  const divs =  document.querySelectorAll('div');
+  const button = document.querySelector('button');
+
+  function logText(e){
+    console.log(this.classList.value);
+    e.stopPropagation(); //only returns the exact element that I click, stop bubbling
+  }
+
+  //document.body.addEventListener('click',logText);
+  divs.forEach(div => div.addEventListener('click', logText,{
+    capture:false, //run the function on the way down, instead of bubble up
+    once:true //only return 1 time response
+  }));
+
+  button.addEventListener('click', ()=> {
+    console.log('click once!!');
+
+  },{
+    once:true //you only wish someone click the button once.
+  });
+
+  
 
 </script>
 </body>
